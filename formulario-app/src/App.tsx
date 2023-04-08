@@ -33,7 +33,7 @@ export const App = () => {
 
   return (
     <div className="App">
-      <Modal Title='Adicionar Carro' open={AddCarroModal} Close={handleAddCarroModalClose} maxWidth="md" fullWidth>
+      <Modal Title='Adicionar Carro' open={AddCarroModal} Close={handleAddCarroModalClose} maxWidth="md" fullWidth scroll='body'>
         <ModalCarro CloseFunc={handleAddCarroModalClose} RefForm={formRef} Submit={handleSubmit}/>
       </Modal>
       <Grid container spacing={2}>
@@ -50,7 +50,7 @@ export const App = () => {
           <h2>Meus carros</h2>
         </Grid>
         <Grid item xs={6} sx={{ textAlign: 'right' }}>
-          <Button variant="contained" onClick={handleAddCarroModalClickOpen}><AddIcon /> Adicionar Tarefa</Button>
+          <Button variant="contained" onClick={handleAddCarroModalClickOpen}><AddIcon /> Adicionar Carro</Button>
         </Grid>
         <Grid item xs={12}>
           <TableContainer component={Paper}>
