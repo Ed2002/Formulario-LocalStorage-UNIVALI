@@ -8,6 +8,9 @@ import { SelectInput } from "../core/components/Form/Select";
 import MenuItem from "@mui/material/MenuItem";
 import LogoHonda from '../assets/honda.svg';
 import LogoFord from '../assets/ford.svg';
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Radio from "@mui/material/Radio";
+import { RadioInput, RadioInputType } from "../core/components/Form/Radio";
 
 
 interface ICarroModal {
@@ -17,6 +20,10 @@ interface ICarroModal {
     InitialData?: CarroType;
 }
 
+const Genders:Array<RadioInputType> = [
+    { value: "Masculino", label: "Masculino" },
+    { value: "Feminino", label: "Feminino" },
+]
 
 
 export const ModalCarro = (({ Submit, CloseFunc, RefForm, InitialData }: ICarroModal) => {
@@ -28,6 +35,9 @@ export const ModalCarro = (({ Submit, CloseFunc, RefForm, InitialData }: ICarroM
                 </Grid>
                 <Grid item xs={12}>
                     <InputCheckBox name="Teste" label="Teste"/>
+                </Grid>
+                <Grid item xs={12}>
+                    <RadioInput name="gender" label="Genero" elements={Genders}/>
                 </Grid>
                 <Grid item xs={12}>
                     <SelectInput name="Tipo" label="Tipo" fullWidth>
