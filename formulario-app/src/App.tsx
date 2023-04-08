@@ -21,7 +21,10 @@ import MenuItem from '@mui/material/MenuItem';
 
 export const App = () => {
   const [Carros,SetCarros] = useState<Array<CarroType>>([]);
+  const [UCarro,SetUCarro] = useState<CarroType>();
+  const [IndexItem, SetIndexItem] = useState<number>(0);
   const [AddCarroModal, setAddCarroModal] = useState<boolean>(false);
+  const [UpdateCarroModal, setUpdateCarroModal] = useState<boolean>(false);
   const formRef = useRef<FormHandles>(null)
 
   const handleAddCarroModalClickOpen = () => {
@@ -31,15 +34,33 @@ export const App = () => {
     setAddCarroModal(false);
   };
 
+  const handleUpdateCarroModalClickOpen = (Carro: CarroType, Index: number) => {
+    SetUCarro(Carro);
+    SetIndexItem(Index);
+    setUpdateCarroModal(true);
+  };
+  const handleUpdateCarroModalClose = () => {
+    setUpdateCarroModal(false);
+  };
+
   const handleSubmit = (data: CarroType) => {
     console.log(data);
     SetCarros([...Carros, data]);
     handleAddCarroModalClose();
   };
 
+  const handleUpdate = (data: CarroType) => {
+    let arr = [...Carros];
+    arr[IndexItem]  = data;
+    SetCarros(arr);
+    handleUpdateCarroModalClose();
+  }
+
   useEffect(() => {
     localStorage.setItem("Carros", JSON.stringify(Carros));
   }, [Carros])
+
+
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const openMenu = Boolean(anchorEl);
@@ -55,6 +76,9 @@ export const App = () => {
     <div className="App">
       <Modal Title='Adicionar Carro' open={AddCarroModal} Close={handleAddCarroModalClose} maxWidth="md" fullWidth scroll='body'>
         <ModalCarro CloseFunc={handleAddCarroModalClose} RefForm={formRef} Submit={handleSubmit}/>
+      </Modal>
+      <Modal Title='Alterar Carro' open={UpdateCarroModal} Close={handleUpdateCarroModalClose} maxWidth="md" fullWidth scroll='body'>
+        <ModalCarro CloseFunc={handleUpdateCarroModalClose} RefForm={formRef} Submit={handleUpdate} InitialData={UCarro}/>
       </Modal>
       <Grid container spacing={2}>
         <Grid item xs={12}>
@@ -119,7 +143,7 @@ export const App = () => {
                                   'aria-labelledby': 'btn-options',
                                 }}
                               >
-                                <MenuItem>Alterar</MenuItem>
+                                <MenuItem onClick={()=>{handleUpdateCarroModalClickOpen(item,index)}}>Alterar</MenuItem>
                                 <MenuItem>Deletar</MenuItem>
                               </Menu>
                            </TableCell>
