@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 import { InputCheckBox } from "../core/components/Form/CheckBox";
 import { SelectInput } from "../core/components/Form/Select";
 import MenuItem from "@mui/material/MenuItem";
+import LogoHonda from '../assets/honda.svg';
+import LogoFord from '../assets/ford.svg';
 
 
 interface ICarroModal {
@@ -26,6 +28,16 @@ export const ModalCarro = (({ Submit, CloseFunc, RefForm, InitialData }: ICarroM
                 </Grid>
                 <Grid item xs={12}>
                     <InputCheckBox name="Teste" label="Teste"/>
+                </Grid>
+                <Grid item xs={12}>
+                    <SelectInput name="Tipo" label="Tipo" fullWidth>
+                        <MenuItem value="Honda">
+                            <img src={LogoHonda} width={100} height={50}/>
+                        </MenuItem>
+                        <MenuItem value="Ford">
+                            <img src={LogoFord} width={100} height={50}/>
+                        </MenuItem>
+                    </SelectInput>
                 </Grid>
                 <Grid item xs={12}>
                     <SelectInput name="testes" label="seleciona">
