@@ -11,12 +11,16 @@ import TableCell from '@mui/material/TableCell';
 import TableBody from '@mui/material/TableBody';
 import Paper from '@mui/material/Paper';
 import { Modal } from './core/components/Modal/Modal';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ModalCarro } from './CarroModal/ModalCarro';
 import { FormHandles } from '@unform/core';
+import IconButton from '@mui/material/IconButton';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 export const App = () => {
-
+  const [Carros,SetCarros] = useState<Array<CarroType>>([]);
   const [AddCarroModal, setAddCarroModal] = useState<boolean>(false);
   const formRef = useRef<FormHandles>(null)
 
@@ -27,8 +31,24 @@ export const App = () => {
     setAddCarroModal(false);
   };
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = (data: CarroType) => {
     console.log(data);
+    SetCarros([...Carros, data]);
+    handleAddCarroModalClose();
+  };
+
+  useEffect(() => {
+    localStorage.setItem("Carros", JSON.stringify(Carros));
+  }, [Carros])
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const openMenu = Boolean(anchorEl);
+
+  const handleClickOpenMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -64,6 +84,56 @@ export const App = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
+                {Carros.length ? (
+                  <>
+                    {Carros.map((item:CarroType, index:number) =>{
+                      return (
+                        <TableRow
+                          key={index}
+                          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                           <TableCell component="th" scope="row">
+                              <p>{item.Marca}</p>
+                           </TableCell>
+                           <TableCell component="th" scope="row">
+                              <p>{item.Modelo}</p>
+                           </TableCell>
+                           <TableCell component="th" scope="row">
+                              <p>{item.Ano}</p>
+                           </TableCell>
+                           <TableCell component="th" scope="row" style={{textAlign: 'center'}}>
+                              <IconButton
+                                id="btn-options"
+                                aria-controls={openMenu ? 'menu-options' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={openMenu ? 'true' : undefined}
+                                onClick={handleClickOpenMenu}
+                              >
+                                <MoreVertIcon />
+                              </IconButton>
+                              <Menu 
+                                id="menu-options"
+                                open={openMenu} anchorEl={anchorEl} 
+                                onClose={handleCloseMenu}
+                                MenuListProps={{
+                                  'aria-labelledby': 'btn-options',
+                                }}
+                              >
+                                <MenuItem>Alterar</MenuItem>
+                                <MenuItem>Deletar</MenuItem>
+                              </Menu>
+                           </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </>
+                ):(
+                  <TableRow>
+                    <TableCell component="th" scope="row" colSpan={4} align="center">
+                      <h3>Sem Carros</h3>
+                    </TableCell>
+                  </TableRow>
+                )}
               </TableBody>
               </Table>
               </TableContainer>

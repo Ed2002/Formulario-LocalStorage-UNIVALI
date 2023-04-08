@@ -88,7 +88,7 @@ export const ModalCarro = (({ Submit, CloseFunc, RefForm, InitialData }: ICarroM
         <Form onSubmit={Submit} ref={RefForm} initialData={InitialData}>
             <Grid container spacing={2} sx={{ padding: 3 }}>
                 <Grid item xs={12}>
-                    <SelectInput name="Marca" label="Marca">
+                    <SelectInput name="Marca" label="Marca *" required>
                         <MenuItem value="Toyota">
                             <img src={LogoToyota} alt="LogoToyota" width={100} height={70}/>
                         </MenuItem>
@@ -107,27 +107,27 @@ export const ModalCarro = (({ Submit, CloseFunc, RefForm, InitialData }: ICarroM
                     </SelectInput>
                 </Grid>
                 <Grid item xs={12}>
-                    <Input name="Modelo" label="Modelo" fullWidth inputProps={{
+                    <Input name="Modelo" label="Modelo" fullWidth required inputProps={{
                         maxLength: 100
                     }}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <Input name="Versao" label="Versão" fullWidth inputProps={{
+                    <Input name="Versao" label="Versão" fullWidth required inputProps={{
                         maxLength: 100
                     }}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <Input type="number" name="Ano" label="Ano" fullWidth inputProps={{
+                    <Input type="number" name="Ano" label="Ano" required fullWidth inputProps={{
                         min: 1769
                     }}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <Input type="number" name="Preco" label="Preço" fullWidth inputProps={{
+                    <Input type="number" name="Preco" label="Preço" required fullWidth inputProps={{
                         min: 0
                     }}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <SelectInput name="Cor" label="Cor">
+                    <SelectInput name="Cor" label="Cor *" required>
                         <MenuItem value="Azul">Azul</MenuItem>
                         <MenuItem value="Bege">Bege</MenuItem>
                         <MenuItem value="Branco">Branco</MenuItem>
@@ -153,7 +153,7 @@ export const ModalCarro = (({ Submit, CloseFunc, RefForm, InitialData }: ICarroM
                     </Accordion>
                 </Grid>
                 <Grid item xs={12}>                    
-                    <RadioInput name="Blindado" label="Blindado" elements={BlindadoOptions}/>
+                    <RadioInput name="Blindado" label="Blindado *" elements={BlindadoOptions} defaultValue={BlindadoOptions[1].value}/>
                 </Grid>
                 <Grid item xs={6}>
                     <Button variant="outlined" size="large" fullWidth type="button" onClick={CloseFunc}>Fechar</Button>

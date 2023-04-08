@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 
 interface IModalProps {
     Title: string
+    SubTitle?: string
     Close: () => void
     open: boolean;
     children: ReactNode
@@ -13,11 +14,12 @@ interface IModalProps {
 
 type ModalProps = DialogProps & IModalProps
 
-export const Modal = ({ Title, Close, open, children, ...rest }: ModalProps) => {
+export const Modal = ({ Title, SubTitle, Close, open, children, ...rest }: ModalProps) => {
     return (
         <Dialog onClose={Close} open={open} {...rest}>
             <DialogTitle>
                 <h3>{Title}</h3>
+                <p>{SubTitle}</p>
                 <IconButton
                     aria-label="close"
                     onClick={Close}
