@@ -50,7 +50,7 @@ export const App = () => {
           <h2>Meus carros</h2>
         </Grid>
         <Grid item xs={6} sx={{ textAlign: 'right' }}>
-          <Button variant="contained" onClick={handleAddCarroModalClickOpen}><AddIcon /> Adicionar Tarefa</Button>
+          <Button variant="contained" onClick={handleAddCarroModalClickOpen}><AddIcon /> Adicionar Carro</Button>
         </Grid>
         <Grid item xs={12}>
           <TableContainer component={Paper}>
