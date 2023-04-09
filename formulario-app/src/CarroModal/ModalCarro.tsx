@@ -153,7 +153,7 @@ export const ModalCarro = (({ Submit, CloseFunc, RefForm, InitialData }: ICarroM
                     </Accordion>
                 </Grid>
                 <Grid item xs={12}>                    
-                    <RadioInput name="Blindado" label="Blindado *" elements={BlindadoOptions} defaultValue={BlindadoOptions[1].value}/>
+                    <RadioInput name="Blindado" label="Blindado *" elements={BlindadoOptions} defaultValue={InitialData?.Blindado ?  InitialData?.Blindado : BlindadoOptions[1].value}/>
                 </Grid>
                 <Grid item xs={6}>
                     <Button variant="outlined" size="large" fullWidth type="button" onClick={CloseFunc}>Fechar</Button>

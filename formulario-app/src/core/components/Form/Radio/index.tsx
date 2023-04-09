@@ -28,6 +28,7 @@ export const RadioInput = ({name,label,elements,...rest}:InputRadioProps) => {
             name: fieldName,
             ref: InputRef.current,
             getValue: refs => {
+                console.log();
                 const checked = refs.find((ref: { checked: any; }) => ref.checked);
                 return checked ? checked.value : null;
             },
@@ -42,7 +43,6 @@ export const RadioInput = ({name,label,elements,...rest}:InputRadioProps) => {
             },
         })
     }, [fieldName, registerField])
-
 
     return (
         <FormControl>

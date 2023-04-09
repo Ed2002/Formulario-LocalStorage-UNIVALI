@@ -33,7 +33,7 @@ export const InputCheckBox = (Props:InputCheckBoxProps) => {
 
     return(
         <FormControlLabel label={Props.label} control={
-        <Checkbox name={Props.name} defaultChecked={Props.defaultChecked}  inputRef={InputRef}/>
+        <Checkbox name={Props.name} defaultChecked={defaultValue}  inputRef={InputRef}/>
         }/> 
     );
 }

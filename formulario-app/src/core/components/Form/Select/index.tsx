@@ -38,7 +38,7 @@ export const SelectInput = ({name,label,children,...rest}:InputSelectProps) => {
     return(
         <FormControl fullWidth>
             <InputLabel id={`idLabel-${name}`}>{label}</InputLabel>
-            <Select name={name} label={label} labelId={`idLabel-${name}`} {...rest} inputRef={InputRef} fullWidth>
+            <Select name={name} label={label} labelId={`idLabel-${name}`} {...rest} inputRef={InputRef} fullWidth defaultValue={defaultValue}>
                 {children}
             </Select>
         </FormControl>

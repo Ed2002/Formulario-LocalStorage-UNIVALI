@@ -22,9 +22,11 @@ import MenuItem from '@mui/material/MenuItem';
 export const App = () => {
   const [Carros,SetCarros] = useState<Array<CarroType>>([]);
   const [UCarro,SetUCarro] = useState<CarroType>();
+  const [DCarro,SetDCarro] = useState<CarroType>();
   const [IndexItem, SetIndexItem] = useState<number>(0);
   const [AddCarroModal, setAddCarroModal] = useState<boolean>(false);
   const [UpdateCarroModal, setUpdateCarroModal] = useState<boolean>(false);
+  const [ConfirmModal, setConfirmModal] = useState<boolean>(false);
   const formRef = useRef<FormHandles>(null)
 
   const handleAddCarroModalClickOpen = () => {
@@ -43,6 +45,14 @@ export const App = () => {
     setUpdateCarroModal(false);
   };
 
+  const handleConfirmModalClickOpen = (Carro:CarroType) => {
+    SetDCarro(Carro);
+    setConfirmModal(true);
+  };
+  const handleConfirmModalClose = () => {
+    setConfirmModal(false);
+  };
+
   const handleSubmit = (data: CarroType) => {
     console.log(data);
     SetCarros([...Carros, data]);
@@ -54,6 +64,16 @@ export const App = () => {
     arr[IndexItem]  = data;
     SetCarros(arr);
     handleUpdateCarroModalClose();
+    handleCloseMenu();
+  }
+
+  const handleDelete = () => {
+    let arr = [...Carros];
+    let index = arr.indexOf(DCarro as CarroType);
+    arr.splice(index, 1);
+    SetCarros(arr);
+    handleConfirmModalClose();
+    handleCloseMenu();
   }
 
   useEffect(() => {
@@ -79,6 +99,19 @@ export const App = () => {
       </Modal>
       <Modal Title='Alterar Carro' open={UpdateCarroModal} Close={handleUpdateCarroModalClose} maxWidth="md" fullWidth scroll='body'>
         <ModalCarro CloseFunc={handleUpdateCarroModalClose} RefForm={formRef} Submit={handleUpdate} InitialData={UCarro}/>
+      </Modal>
+      <Modal Title='Deletar' open={ConfirmModal} Close={handleConfirmModalClose} maxWidth="xs" fullWidth scroll='body'>
+        <Grid container spacing={2} sx={{ padding: 3 }}>
+          <Grid item xs={12}>
+            <p>Deletar este carro ?</p>
+          </Grid>
+          <Grid item xs={6}>
+            <Button variant="outlined" size="large" fullWidth type="button" onClick={handleConfirmModalClose}>Fechar</Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button variant="contained" size="large" type="button" fullWidth onClick={handleDelete}>Confirmar</Button>
+          </Grid>
+        </Grid>
       </Modal>
       <Grid container spacing={2}>
         <Grid item xs={12}>
@@ -144,7 +177,7 @@ export const App = () => {
                                 }}
                               >
                                 <MenuItem onClick={()=>{handleUpdateCarroModalClickOpen(item,index)}}>Alterar</MenuItem>
-                                <MenuItem>Deletar</MenuItem>
+                                <MenuItem onClick={()=>{handleConfirmModalClickOpen(item)}}>Deletar</MenuItem>
                               </Menu>
                            </TableCell>
                         </TableRow>
