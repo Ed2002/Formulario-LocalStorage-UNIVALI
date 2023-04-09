@@ -1,4 +1,4 @@
-type CarroType = {
+export type CarroType = {
     Marca : string,
     Modelo : string,
     Ano : string,

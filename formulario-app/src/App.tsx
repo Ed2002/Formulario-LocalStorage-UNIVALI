@@ -18,6 +18,7 @@ import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { CarroType } from './Types/Carro';
 
 export const App = () => {
   const [Carros,SetCarros] = useState<Array<CarroType>>([]);
