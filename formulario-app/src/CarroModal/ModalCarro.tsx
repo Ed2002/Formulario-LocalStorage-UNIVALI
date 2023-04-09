@@ -18,6 +18,7 @@ import LogoChevrolet from '../assets/chevrolet-2.svg';
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
+import { CarroType } from "../Types/Carro";
 
 
 interface ICarroModal {
